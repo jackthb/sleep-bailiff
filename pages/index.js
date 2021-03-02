@@ -1,65 +1,85 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import Head from 'next/head';
+import styles from '../styles/Home.module.css';
+import React, { useState, useEffect } from 'react';
+import { Line } from 'react-chartjs-2';
 
+import FindDebt from '../components/FindDebt';
+
+const data = {
+  labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+  datasets: [
+    {
+      label: 'My First dataset',
+      fill: false,
+      lineTension: 0.1,
+      backgroundColor: 'rgba(75,192,192,0.4)',
+      borderColor: 'rgba(75,192,192,1)',
+      borderCapStyle: 'butt',
+      borderDash: [],
+      borderDashOffset: 0.0,
+      borderJoinStyle: 'miter',
+      pointBorderColor: 'rgba(75,192,192,1)',
+      pointBackgroundColor: '#fff',
+      pointBorderWidth: 1,
+      pointHoverRadius: 5,
+      pointHoverBackgroundColor: 'rgba(75,192,192,1)',
+      pointHoverBorderColor: 'rgba(220,220,220,1)',
+      pointHoverBorderWidth: 2,
+      pointRadius: 1,
+      pointHitRadius: 10,
+      data: [65, 59, 80, 81, 56, 55, 40],
+    },
+  ],
+};
+
+function pastTwoWeeks() {
+  let currentDate = new Date();
+  var fortnightAway = new Date(Date.now() - 12096e5);
+  return (
+    <div>
+      <p>{fortnightAway.toISOString().substring(0, 10)}</p>
+      <p>{currentDate.toISOString().substring(0, 10)}</p>
+    </div>
+  );
+}
 export default function Home() {
+  const [sleep, setSleep] = useState({});
+  useEffect(() => {
+    const getData = async () => {
+      const user_id = '8464BB';
+      // dates in yyyy-mm-dd
+      const startDate = '2021-02-22';
+      const endDate = '2021-03-01';
+      const url = `https://api.fitbit.com/1.2/user/${user_id}/sleep/date/${endDate}.json`;
+      // const url = `https://api.fitbit.com/1.2/user/${user_id}/sleep/date/${startDate}/${endDate}.json`;
+      const res = await fetch(url, {
+        method: 'GET',
+        headers: new Headers({
+          Authorization: 'Bearer ' + process.env.NEXT_PUBLIC_FITBEARER,
+        }),
+      }).then((res) => res.json());
+      // setSleep(res);
+    };
+    getData();
+  }, []);
   return (
     <div className={styles.container}>
       <Head>
         <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel='icon' href='/favicon.ico' />
       </Head>
-
       <main className={styles.main}>
         <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
+          {pastTwoWeeks()}
+          <FindDebt />
+          Welcome to <a href='https://nextjs.org'>Next.js!</a>
         </h1>
-
         <p className={styles.description}>
           Get started by editing{' '}
           <code className={styles.code}>pages/index.js</code>
         </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
+        <Line data={data} />
       </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
     </div>
-  )
+  );
 }
