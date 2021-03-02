@@ -21,20 +21,25 @@ let FindDebt = () => {
   }, []);
 
   function calculateDebt() {
+    // check if sleep
     let debt = 0;
-    if (sleep) {
-      for (let i = 0; i < 7; i++) {
-        debt += 2.88e7 - sleep.sleep[i].duration;
-        console.log(sleep.sleep[i].duration / 3.6e6);
-      }
+
+    for (let i = 0; i < sleep.sleep.length; i++) {
+      debt += 2.88e7 - sleep.sleep[i].duration;
+      console.log('sleep time' + sleep.sleep[i].duration / 3.6e6);
+      console.log('debt' + debt / 3.6e6);
     }
-    console.log(debt / 3.6e6);
+
+    // console.log(debt / 3.6e6);
     return debt;
   }
   return (
     <div>
       <h1>Your Sleep Debt</h1>
-      <h2>The science: {calculateDebt() / 3.6e6} hours of debt</h2>
+      <h2>
+        The science: {sleep.sleep && (calculateDebt() / 3.6e6).toFixed(2)} hours
+        of debt
+      </h2>
     </div>
   );
 };

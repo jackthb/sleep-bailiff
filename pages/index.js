@@ -32,16 +32,6 @@ const data = {
   ],
 };
 
-function pastTwoWeeks() {
-  let currentDate = new Date();
-  var fortnightAway = new Date(Date.now() - 12096e5);
-  return (
-    <div>
-      <p>{fortnightAway.toISOString().substring(0, 10)}</p>
-      <p>{currentDate.toISOString().substring(0, 10)}</p>
-    </div>
-  );
-}
 export default function Home() {
   const [sleep, setSleep] = useState({});
   useEffect(() => {
@@ -70,7 +60,6 @@ export default function Home() {
       </Head>
       <main className={styles.main}>
         <h1 className={styles.title}>
-          {pastTwoWeeks()}
           <FindDebt />
           Welcome to <a href='https://nextjs.org'>Next.js!</a>
         </h1>
