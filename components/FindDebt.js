@@ -24,10 +24,13 @@ let FindDebt = () => {
     // check if sleep
     let debt = 0;
 
-    for (let i = 0; i < sleep.sleep.length; i++) {
-      debt += 2.88e7 - sleep.sleep[i].duration;
-      console.log('sleep time' + sleep.sleep[i].duration / 3.6e6);
-      console.log('debt' + debt / 3.6e6);
+    for (let i = 0; i < 6; i++) {
+      debt += 480 - sleep.sleep[i].minutesAsleep;
+      console.log(
+        'sleep time' + sleep.sleep[i].minutesAsleep / 60 + '          8'
+      );
+      console.log(480 - sleep.sleep[i].minutesAsleep);
+      console.log('date' + sleep.sleep[i].dateOfSleep);
     }
 
     // console.log(debt / 3.6e6);
