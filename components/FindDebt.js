@@ -26,9 +26,7 @@ let FindDebt = () => {
 
     for (let i = 0; i < 6; i++) {
       debt += 480 - sleep.sleep[i].minutesAsleep;
-      console.log(
-        'sleep time' + sleep.sleep[i].minutesAsleep / 60 + '          8'
-      );
+      console.log('sleep time' + sleep.sleep[i].minutesAsleep / 60);
       console.log(480 - sleep.sleep[i].minutesAsleep);
       console.log('date' + sleep.sleep[i].dateOfSleep);
     }
