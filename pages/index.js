@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <div className='container'>
       <Head>
-        <title>No SSR Charts</title>
+        <title>Sleep Bailiff</title>
       </Head>
       <main>
         <h1 className='title'>Jack's Sleep over the last week</h1>
