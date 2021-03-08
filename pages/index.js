@@ -1,7 +1,39 @@
 import Head from 'next/head';
 import MyChart from '../components/MyChart';
 import React, { useEffect, useState } from 'react';
-export default function Home() {
+import { sub } from 'date-fns';
+import FindDebt from '../components/FindDebt';
+import RangeChart from '../components/RangeChart';
+
+const fetchData = async (url) => {
+  const query = await fetch(url, {
+    method: 'GET',
+    // mode: 'no-cors',
+    headers: new Headers({
+      Authorization: 'Bearer ' + process.env.NEXT_PUBLIC_FITBEARER,
+    }),
+  });
+  return await query.json();
+};
+
+export const getStaticProps = async () => {
+  const endDate = new Date().toISOString().substring(0, 10);
+  const startDate = sub(new Date(), { weeks: 1 })
+    .toISOString()
+    .substring(0, 10);
+  const user_id = '8464BB';
+  // dates in yyyy-mm-dd
+  // const url = `https://api.fitbit.com/1.2/user/${user_id}/sleep/date/${endDate}.json`;
+  const url = `https://api.fitbit.com/1.2/user/${user_id}/sleep/date/${startDate}/${endDate}.json`;
+  const data = await fetchData(url);
+  return {
+    props: {
+      sleep: data.sleep,
+    },
+  };
+};
+
+export default function Home({ sleep }) {
   return (
     <div className='container'>
       <Head>
@@ -9,7 +41,9 @@ export default function Home() {
       </Head>
       <main>
         <h1 className='title'>Jack's Sleep over the last week</h1>
-        <MyChart />
+        {sleep && <MyChart sleep={sleep} />}
+        {sleep && <FindDebt sleep={sleep} />}
+        {sleep && <RangeChart sleep={sleep} />}
       </main>
       <style jsx>{`
         .container {
