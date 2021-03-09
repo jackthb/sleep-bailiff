@@ -5,7 +5,7 @@ const Chart = dynamic(() => import('react-apexcharts'), { ssr: false });
 const MyChart = ({ sleep }) => {
   const [options, setOptions] = useState({
     chart: {
-      id: 'line-chart',
+      background: '#fff',
     },
     xaxis: {
       categories: sleep.map((x) => x.dateOfSleep).reverse(),
@@ -26,12 +26,6 @@ const MyChart = ({ sleep }) => {
   return (
     <div className='chart'>
       {series && <Chart options={options} series={series} type='bar' />}
-      <style jsx>{`
-        .chart {
-          width: 1000px;
-          margin: auto;
-        }
-      `}</style>
     </div>
   );
 };

@@ -12,7 +12,7 @@ let FindDebt = ({ sleep }) => {
     return debt;
   }
   return (
-    <div>
+    <div className='font-mono text-5xl text-center'>
       <h1>My Sleep Debt</h1>
       <h2>{(calculateDebt() / 60).toFixed(2)} hours of debt</h2>
     </div>

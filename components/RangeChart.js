@@ -18,6 +18,7 @@ const RangeChart = ({ sleep }) => {
     options: {
       chart: {
         type: 'rangeBar',
+        background: '#fff',
       },
       plotOptions: {
         bar: {
