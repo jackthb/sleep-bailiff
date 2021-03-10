@@ -2,7 +2,6 @@ import Head from 'next/head';
 import MyChart from '../components/MyChart';
 import React, { useEffect, useState } from 'react';
 import { sub } from 'date-fns';
-import FindDebt from '../components/FindDebt';
 
 import Background from '../components/Background';
 
@@ -47,10 +46,12 @@ export default function Home({ sleep }) {
           <h1 className='text-center text-4xl'>
             Jack's Sleep over the last week
           </h1>
-
-          {sleep && <MyChart sleep={sleep} />}
-          {sleep && <FindDebt sleep={sleep} />}
-          {sleep && <RangeChart sleep={sleep} />}
+          {sleep && (
+            <div className='grid-cols-2 grid gap-4'>
+              <MyChart sleep={sleep} />
+              <RangeChart sleep={sleep} />
+            </div>
+          )}
         </Background>
       </main>
     </div>

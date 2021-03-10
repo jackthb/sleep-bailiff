@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+
+import FindDebt from '../components/FindDebt';
 import dynamic from 'next/dynamic';
 const Chart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
@@ -25,7 +27,15 @@ const MyChart = ({ sleep }) => {
   );
   return (
     <div className='chart'>
-      {series && <Chart options={options} series={series} type='bar' />}
+      {series && (
+        <Chart
+          className='w-full'
+          options={options}
+          series={series}
+          type='bar'
+        />
+      )}
+      <FindDebt sleep={sleep} />
     </div>
   );
 };
