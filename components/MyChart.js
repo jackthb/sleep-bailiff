@@ -8,6 +8,7 @@ const MyChart = ({ sleep }) => {
   const [options, setOptions] = useState({
     chart: {
       background: '#fff',
+      width: '100%',
     },
     xaxis: {
       categories: sleep.map((x) => x.dateOfSleep).reverse(),
