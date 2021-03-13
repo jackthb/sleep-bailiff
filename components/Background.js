@@ -59,7 +59,7 @@ export default function App({ children }) {
         <div className='bg-gray-800 col-span-7 rounded animate-pulse'></div>
         <div className='bg-gray-800 col-span-1 rounded animate-pulse'></div>
       </div>
-      <div className='relative'>{children}</div>
+      <div className='relative h-4/5'>{children}</div>
     </div>
   );
 }

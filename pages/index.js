@@ -41,9 +41,9 @@ export default function Home({ sleep }) {
       <Head>
         <title>Sleep Bailiff</title>
       </Head>
-      <main className='h-full overflow-y-hidden overflow-x-hidden text-white'>
+      <main className='h-full overflow-y-hidden overflow-x-hidden'>
         <Background>
-          <h1 className='text-center text-4xl'>
+          <h1 className='text-center text-white text-4xl'>
             Jack's Sleep over the last week
           </h1>
           {sleep && (

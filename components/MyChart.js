@@ -8,7 +8,6 @@ const MyChart = ({ sleep }) => {
   const [options, setOptions] = useState({
     chart: {
       background: '#fff',
-      width: '100%',
     },
     xaxis: {
       categories: sleep.map((x) => x.dateOfSleep).reverse(),
@@ -21,11 +20,6 @@ const MyChart = ({ sleep }) => {
     },
   ]);
 
-  console.log(
-    sleep.map((x) => {
-      return { x: x.dateOfSleep, y: [x.startTime, x.endTime] };
-    })
-  );
   return (
     <div className='chart'>
       {series && (
@@ -34,6 +28,7 @@ const MyChart = ({ sleep }) => {
           options={options}
           series={series}
           type='bar'
+          height={700}
         />
       )}
       <FindDebt sleep={sleep} />
