@@ -87,7 +87,7 @@ const RangeChart = ({ sleep }) => {
         series={series.series}
         type='rangeBar'
         height={800}
-        width={1000}
+        width='100%'
       />
       <p className='text-white'>Not as useful as I'd like...</p>
     </div>

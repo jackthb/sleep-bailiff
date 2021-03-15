@@ -6,6 +6,7 @@ import { sub } from 'date-fns';
 import Background from '../components/Background';
 
 import RangeChart from '../components/RangeChart';
+import StackedBar from '../components/StackedBar';
 
 const fetchData = async (url) => {
   const query = await fetch(url, {
@@ -44,13 +45,14 @@ export default function Home({ sleep }) {
       </Head>
       <main className='h-full overflow-y-hidden overflow-x-hidden'>
         <Background>
-          <h1 className='text-center text-white text-4xl'>
-            Jack's Sleep over the last week
+          <h1 className='text-center text-white mb-5 text-4xl'>
+            Jack's sleep over the last week
           </h1>
           {sleep && (
             <div className='grid-cols-2 grid gap-4'>
               <MyChart sleep={sleep} />
               <RangeChart sleep={sleep} />
+              {/* <StackedBar sleep={sleep} /> */}
             </div>
           )}
         </Background>
