@@ -32,6 +32,7 @@ export const getStaticProps = async () => {
     props: {
       sleep: data.sleep,
     },
+    revalidate: 1,
   };
 };
 
